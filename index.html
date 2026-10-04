@@ -30,7 +30,7 @@
 </header>
 
 
-<div id="loginGate" class="login-gate">
+<noscript><div style="position:fixed;inset:0;z-index:9999;background:#f7f5ef;padding:40px;font:18px Arial">Please enable JavaScript to use login and website buttons.</div></noscript><div id="loginGate" class="login-gate">
   <div class="gate-card">
     <div class="gate-brand" aria-hidden="true"></div>
     <div class="eyebrow">WELCOME</div>
@@ -268,4 +268,76 @@ document.getElementById("gateSignup").onclick=()=>openAuth("signup");
 const _openDashboard=openDashboard;
 openDashboard=function(){_openDashboard();updateGate()};
 updateGate();
-</script></body></html>
+</script>
+<script>
+(function(){
+  function ready(fn){
+    if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+    else fn();
+  }
+  ready(function(){
+    function showAuth(mode){
+      try {
+        if(typeof openAuth === "function") openAuth(mode);
+        else {
+          var m=document.getElementById("authModal");
+          if(m) m.classList.remove("hidden");
+        }
+      } catch(e) {
+        var m=document.getElementById("authModal");
+        if(m) m && m.classList.remove("hidden");
+      }
+    }
+
+    var gateLogin=document.getElementById("gateLogin");
+    var gateSignup=document.getElementById("gateSignup");
+    if(gateLogin) gateLogin.addEventListener("click",function(e){e.preventDefault();showAuth("login");});
+    if(gateSignup) gateSignup.addEventListener("click",function(e){e.preventDefault();showAuth("signup");});
+
+    // Ensure the modal close controls always work.
+    document.querySelectorAll("[data-close]").forEach(function(b){
+      b.addEventListener("click",function(e){
+        e.preventDefault();
+        document.querySelectorAll(".modal").forEach(function(m){m.classList.add("hidden");});
+      });
+    });
+
+    // Ensure the auth submit button works even if a previous handler failed.
+    var submit=document.getElementById("emailSubmit");
+    if(submit) submit.addEventListener("click",function(e){
+      e.preventDefault();
+      // The original handler remains the primary handler. If it did not open the dashboard,
+      // show a useful validation message rather than making the button appear dead.
+      setTimeout(function(){
+        var msg=document.getElementById("authMsg");
+        var email=document.getElementById("authEmail");
+        var pass=document.getElementById("authPassword");
+        if(msg && !localStorage.getItem("sn_session") && email && pass &&
+           email.value && pass.value.length>=6 && msg.textContent===""){
+          msg.textContent="Please check your email and password, then try again.";
+        }
+      },50);
+    });
+
+    // Navigation links should scroll reliably.
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener("click",function(e){
+        var id=a.getAttribute("href");
+        if(id && id.length>1){
+          var el=document.querySelector(id);
+          if(el){e.preventDefault();el.scrollIntoView({behavior:"smooth"});}
+        }
+      });
+    });
+
+    // If a session already exists, remove the login gate.
+    try{
+      if(localStorage.getItem("sn_session")){
+        var gate=document.getElementById("loginGate");
+        if(gate) gate.classList.add("hidden");
+      }
+    }catch(e){}
+  });
+})();
+</script>
+</body></html>
