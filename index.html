@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PicBoard — Local Photo Listings</title>
-<meta name="description" content="A photo-first classifieds and creator listing platform.">
+<title>PicBoard — Platinum Photo Listings</title>
+<meta name="description" content="Photo-first local listings with profiles, short links, favourites and Platinum plans.">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#b62872">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,19 +19,19 @@
 <header class="topbar">
   <a class="brand" href="#home"><span class="brand-mark">P</span><span>PicBoard</span></a>
   <div class="top-search"><input id="searchInput" placeholder="Search listings, categories or cities"><button id="searchBtn">Search</button></div>
-  <nav><a href="#explore">Explore</a><button id="savedBtn" class="btn ghost" type="button">Saved</button><button id="installBtn" class="btn ghost hidden" type="button">Install</button><button id="themeBtn" class="icon-btn" type="button" title="Toggle dark mode">☾</button><button id="plansTopBtn" class="btn ghost" type="button">Premium</button><button id="createBtn" class="btn primary">Post Ad</button><button id="loginBtn" class="btn ghost">Login</button><button id="profileBtn" class="icon-btn hidden">☻</button></nav>
+  <nav><a href="#explore">Explore</a><button id="savedBtn" class="btn ghost" type="button">Saved</button><button id="installBtn" class="btn ghost hidden" type="button">Install</button><button id="themeBtn" class="icon-btn" type="button" title="Toggle dark mode">☾</button><button id="plansTopBtn" class="btn ghost" type="button">PLATINUM</button><button id="createBtn" class="btn primary">Post Ad</button><button id="loginBtn" class="btn ghost">Login</button><button id="profileBtn" class="icon-btn hidden">☻</button></nav>
 </header>
 
 <main id="publicApp">
 <section id="home" class="hero">
-  <div><span class="pill">PHOTO-FIRST LISTINGS</span><h1>Post photos. Share your listing. <span>Get discovered.</span></h1>
-  <p>Create a profile, publish up to five photos per post, and share a clean short link.</p>
+  <div><span class="pill">PHOTO-FIRST LISTINGS</span><h1>Post your profile. Share your listing. <span>Get discovered.</span></h1>
+  <p>Create a verified profile, publish up to five photos per post, add captions, and share a clean short link.</p>
   <div class="actions"><button id="heroPostBtn" class="btn primary">Create a listing</button><a href="#explore" class="btn ghost">Browse listings</a></div></div>
-  <div class="hero-list"><div class="mini-card"><div class="mini-photo"></div><div><b>Featured listing</b><p>Ahmedabad · 5 photos</p></div></div><div class="mini-card"><div class="mini-photo two"></div><div><b>Verified profile</b><p>Local · Public</p></div></div></div>
+  <div class="hero-list"><div class="mini-card"><div class="mini-photo"></div><div><b>Top profile</b><p>Ahmedabad · 5 photos · Verified</p></div></div><div class="mini-card"><div class="mini-photo two"></div><div><b>Popular listing</b><p>Ahmedabad · Public · 24 years</p></div></div></div>
 </section>
 
 <section id="explore" class="section">
-  <div class="section-head"><div><span class="eyebrow">EXPLORE</span><h2>Latest listings</h2></div><div class="filters"><select id="categoryFilter"><option value="">All categories</option><option>For Sale</option><option>Services</option><option>Jobs</option><option>Property</option><option>Vehicles</option><option>Fashion</option><option>Other</option></select><input id="cityFilter" placeholder="City"><select id="sortFilter"><option value="new">Newest</option><option value="views">Most viewed</option><option value="likes">Most liked</option></select><button id="saveSearchBtn" class="btn ghost" type="button">Save search</button></div></div>
+  <div class="section-head"><div><span class="eyebrow">EXPLORE</span><h2>Latest listings</h2></div><div class="filters"><select id="categoryFilter"><option value="">All categories</option><option>Profiles</option><option>Services</option><option>Jobs</option><option>Property</option><option>Vehicles</option><option>Fashion</option><option>For Sale</option><option>Other</option></select><input id="cityFilter" placeholder="City"><select id="sortFilter"><option value="new">Newest</option><option value="views">Most viewed</option><option value="likes">Most liked</option></select><button id="saveSearchBtn" class="btn ghost" type="button">Save search</button></div></div>
   <div id="listingGrid" class="listing-grid"></div>
   <div id="emptyState" class="empty hidden">No public listings found.</div>
 </section>
@@ -46,7 +46,7 @@
    <input id="editPostId" type="hidden">
    <input id="postTitle" placeholder="Post title">
    <textarea id="postDesc" placeholder="Description"></textarea>
-   <div class="form-grid"><select id="postCategory"><option>For Sale</option><option>Services</option><option>Jobs</option><option>Property</option><option>Vehicles</option><option>Fashion</option><option>Other</option></select><input id="postLocation" placeholder="City / location"></div>
+   <div class="form-grid"><select id="postCategory"><option>Profiles</option><option>Services</option><option>Jobs</option><option>Property</option><option>Vehicles</option><option>Fashion</option><option>For Sale</option><option>Other</option></select><input id="postLocation" placeholder="City / location"><input id="postAge" type="number" min="18" max="99" placeholder="Age (optional)"></div>
    <div class="form-grid"><select id="visibility"><option value="public">Public</option><option value="unlisted">Unlisted</option><option value="private">Private</option></select><input id="expiry" type="datetime-local"></div><input id="postTags" placeholder="Tags (comma separated)"><label class="check"><input id="autoSaveToggle" type="checkbox" checked> Auto-save draft on changes</label>
    <div class="form-grid"><input id="postPassword" type="password" placeholder="Optional post password"><label class="check"><input id="pinPost" type="checkbox"> Pin / Featured</label></div>
    <label class="upload"><input id="photoInput" type="file" accept="image/*" multiple> <b>Add up to 5 photos</b><small>Photos are saved immediately and watermarked with 6206085383.</small></label>
@@ -68,7 +68,7 @@
 
 <div id="postModal" class="modal hidden"><div class="modal-card wide"><button class="close" data-close>×</button><div id="postDetail"></div></div></div>
 
-<div id="plansModal" class="modal hidden"><div class="modal-card wide"><button class="close" data-close>×</button><h2>Premium</h2><div class="plan-grid"><article class="plan"><span>TRIAL</span><h3>₹1</h3><p>30 days</p><button class="btn primary planBtn" data-plan="trial">Start</button></article><article class="plan featured"><span>PLATINUM</span><h3>₹299</h3><p>30 days</p><button class="btn primary planBtn" data-plan="platinum">Choose</button></article><article class="plan"><span>BUSINESS</span><h3>₹599</h3><p>6 months</p><button class="btn primary planBtn" data-plan="business">Choose</button></article><article class="plan"><span>BUSINESS PRO</span><h3>₹999</h3><p>1 year</p><button class="btn primary planBtn" data-plan="business_pro">Choose</button></article></div><p class="note">Live recurring billing requires Razorpay Live credentials and a customer-authorized mandate.</p></div></div>
+<div id="plansModal" class="modal hidden"><div class="modal-card wide"><button class="close" data-close>×</button><h2>PLATINUM</h2><div class="plan-grid"><article class="plan"><span>PLATINUM TRIAL</span><h3>₹1</h3><p>30 days</p><button class="btn primary planBtn" data-plan="trial">Start</button></article><article class="plan featured"><span>PLATINUM</span><h3>₹299</h3><p>30 days</p><button class="btn primary planBtn" data-plan="platinum">Choose</button></article><article class="plan"><span>PLATINUM BUSINESS</span><h3>₹599</h3><p>6 months</p><button class="btn primary planBtn" data-plan="business">Choose</button></article><article class="plan"><span>PLATINUM BUSINESS PRO</span><h3>₹999</h3><p>1 year</p><button class="btn primary planBtn" data-plan="business_pro">Choose</button></article></div><p class="note">Live recurring billing requires Razorpay Live credentials and a customer-authorized mandate.</p></div></div>
 
 <div id="savedModal" class="modal hidden"><div class="modal-card wide"><button class="close" data-close>×</button><h2>Saved posts & searches</h2><div id="savedContent"></div></div></div>
 <div id="notificationsModal" class="modal hidden"><div class="modal-card"><button class="close" data-close>×</button><h2>Notifications</h2><div id="notificationsContent"><p class="note">Login to view your notifications.</p></div></div></div>
@@ -81,15 +81,15 @@
   </div>
 </section>
 
-<footer><span>© 2026 PicBoard</span><a href="mailto:kobraking97875@gmail.com">Support</a><button id="plansBtn" class="text-btn">Premium</button></footer>
+<footer><span>© 2026 PicBoard · PLATINUM</span><a href="mailto:kobraking97875@gmail.com">Support</a><button id="plansBtn" class="text-btn">PLATINUM</button></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-window.SUPABASE_URL = localStorage.getItem('picboard_supabase_url') || '';
-window.SUPABASE_ANON_KEY = localStorage.getItem('picboard_supabase_key') || '';
+window.SUPABASE_URL = localStorage.getItem('picboard_supabase_url') || 'https://cvlinhjhyxuntbbxrrxq.supabase.co';
+window.SUPABASE_ANON_KEY = localStorage.getItem('picboard_supabase_key') || 'sb_publishable_cQ1_ABy2MYZSSbJOGtw1HA_zqgU0mW2';
 window.RAZORPAY_KEY_ID = window.RAZORPAY_KEY_ID || 'rzp_test_TjlrAG631yHMOC';
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}));}</script>
